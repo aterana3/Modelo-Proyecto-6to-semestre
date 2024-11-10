@@ -16,4 +16,16 @@
             </search>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const $search = document.querySelector('search');
+            $search.addEventListener('submit', function (event) {
+                event.preventDefault();
+                const value = $search.querySelector('input').value;
+                if (value) {
+                    window.location.href = `/toll_record/?lince_plate=${value}`;
+                }
+            });
+        });
+    </script>
 </section>

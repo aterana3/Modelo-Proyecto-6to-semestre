@@ -1,8 +1,10 @@
 {% extends "layouts/RootLayout.html" %}
 {% block slot %}
-    {% include "components/Header.html" %}
-    <main class="flex flex-col gap-20 md:gap-24">
-        {% block content %}{% endblock %}
-    </main>
-    {% include "components/Footer.html" %}
+    <div class="min-h-screen grid grid-rows-layout">
+        {% include "components/Header.html" %}
+        <main class="flex flex-col gap-20 md:gap-24">
+            {% block content %}{% endblock %}
+        </main>
+        {% include "components/Footer.html" %}
+    </div>
 {% endblock %}

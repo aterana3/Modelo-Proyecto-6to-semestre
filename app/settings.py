@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'modules.core',
     'modules.authentication',
     'modules.toll_record',
+    'modules.dashboard',
 ]
 
 MIDDLEWARE = [

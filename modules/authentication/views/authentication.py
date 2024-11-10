@@ -7,7 +7,7 @@ from django.shortcuts import redirect
 
 
 class LoginView(DjangoLoginView):
-    template_name = 'login/login.html'
+    template_name = 'login/page.html'
     form_class = LoginForm
 
     def dispatch(self, request, *args, **kwargs):
