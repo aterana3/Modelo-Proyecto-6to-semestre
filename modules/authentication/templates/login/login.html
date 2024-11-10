@@ -1,0 +1,51 @@
+{% extends 'layouts/RootLayout.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+{% block slot %}
+    <main class="bg-gradient-to-br from-gray-100 to-gray-200 min-h-screen flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden w-full max-w-4xl flex">
+            <div class="bg-login hidden lg:block w-1/2 bg-cover bg-center">
+                <div class="h-full w-full bg-black bg-opacity-20 flex items-center justify-center">
+                    <div class="text-center text-white p-8">
+                        <h2 class="text-3xl font-bold mb-4">Bienvenido de nuevo</h2>
+                        <p class="text-lg">Tu viaje continúa aquí</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full lg:w-1/2 p-8 md:p-12">
+                <div class="text-center mb-8">
+                    <div class="mb-6 flex justify-center">
+                        <a href="{% url 'home' %}" class="hover:opacity-80 transition-opacity">
+                            <img src="{% static 'images/logotipo.svg' %}" alt="QuickPass" class="h-12"/>
+                        </a>
+                    </div>
+                    <h1 class="text-2xl font-bold text-gray-800">Inicia sesión en tu cuenta</h1>
+                    <p class="text-gray-600 mt-2">Ingresa tus credenciales para continuar</p>
+                </div>
+
+                <form id="login" class="space-y-6" method="post">
+                    {% csrf_token %}
+                    {% include "components/form/Field.html" with field=form.username  %}
+
+                    {% include "components/form/Field.html" with field=form.password  %}
+
+
+                    <div class="flex items-center justify-between">
+                        {% include "components/form/Field.html" with field=form.remember_me  %}
+
+                        <a href="#" class="text-sm text-primary hover:text-primary-light transition-colors">
+                            ¿Olvidaste tu contraseña?
+                        </a>
+                    </div>
+                    <button type="submit"
+                            class="w-full py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary-light focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+                        Iniciar sesión
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+{% endblock %}

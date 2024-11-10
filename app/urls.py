@@ -16,7 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from modules.core.views import home
+from django.conf import settings
+from django.conf.urls.static import static
+from django.urls import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-]
+    path('', home.HomeView.as_view(), name='home'),
+    path('authentication/', include('modules.authentication.urls')),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

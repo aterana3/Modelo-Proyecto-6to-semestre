@@ -1,0 +1,31 @@
+{% load static %}
+<header class="max-w-[1440px] mx-auto px-4 py-8 flex justify-between items-center">
+    <a href="{% url 'home' %}" class="flex items-center space-x-2">
+        <img src="{% static '/images/logotipo.svg' %}" alt="Logotipo QuickPass" class="w-auto h-[42px]"/>
+    </a>
+    {% if user.is_authenticated %}
+        <div class="flex items-center gap-2">
+            <details class="relative">
+                <summary class="text-lg font-semibold bg-primary text-white rounded-full px-4 py-2 flex items-center gap-2 cursor-pointer list-none">
+                    <img class="rounded-full w-6 h-6" src="{{ user.get_avatar }}" alt="user">
+                    <p>Hola, {{ user.username }}</p>
+                    <i class="fa-solid fa-caret-down text-sm"></i>
+                </summary>
+                <div class="absolute right-0 mt-4 w-48 bg-white border border-gray-200 shadow-md rounded-md">
+                    <ul>
+                        <li>
+                            <a href="#"
+                               class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'authentication:logout' %}"
+                               class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Cerrar sesión</a>
+                        </li>
+                    </ul>
+                </div>
+            </details>
+        </div>
+    {% else %}
+        <a href="{% url 'authentication:login' %}" class="text-lg font-semibold bg-primary text-white rounded-full px-4 py-2">Iniciar sesión</a>
+    {% endif %}
+</header>

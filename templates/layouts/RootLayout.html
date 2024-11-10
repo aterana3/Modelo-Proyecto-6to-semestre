@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="description" content="Aplicativo QuickPass para el funcionamiento automatico del peaje" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {% load static %}
+    <script src="{% static '/vendor/js/tailwind/tailwind.js' %}"></script>
+    <script src="{% static '/vendor/js/tailwind/tailwind.config.js' %}"></script>
+    <link rel="icon" type="image/svg+xml" href="{% static '/images/favicon.svg' %}" />
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
