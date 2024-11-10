@@ -47,3 +47,18 @@ class User(AbstractUser):
         verbose_name = 'User'
         verbose_name_plural = 'Users'
         db_table = 'users'
+
+
+class Location(ModelBase):
+    name = models.CharField(max_length=100, verbose_name='Name')
+    description = models.TextField(verbose_name='Description', null=True, blank=True)
+    latitude = models.DecimalField(max_digits=9, decimal_places=6, verbose_name='Latitude')
+    longitude = models.DecimalField(max_digits=9, decimal_places=6, verbose_name='Longitude')
+
+    def __str__(self):
+        return '{}'.format(self.name)
+
+    class Meta:
+        verbose_name = 'Location'
+        verbose_name_plural = 'Locations'
+        db_table = 'locations'
