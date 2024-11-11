@@ -9,6 +9,7 @@ class TollRecord(ModelBase):
     location = models.ForeignKey(Location, on_delete=models.CASCADE, verbose_name="Location")
     amount_due = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Amount Due")
     paid = models.BooleanField(default=False, verbose_name="Paid")
+    image = models.ImageField(upload_to='toll_records', verbose_name="Image")
 
     def __str__(self):
         return '{}'.format(self.lince_plate)

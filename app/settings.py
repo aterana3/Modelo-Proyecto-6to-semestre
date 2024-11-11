@@ -134,3 +134,10 @@ STATICFILES_DIRS = [BASE_DIR / "static",]
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# VIDEOCAM SETTINGS
+CAMERA_PORT = 1
+
+# TOLL RECORD SETTINGS
+LOCATION_ID = 1
+AMOUNT_DUE = 5.00
