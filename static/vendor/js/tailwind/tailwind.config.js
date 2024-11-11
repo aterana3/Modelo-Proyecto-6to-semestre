@@ -8,7 +8,7 @@ tailwind.config = {
                 }
             },
             backgroundImage: {
-                'login': "url('/authentication/login-bg.webp')",
+                'login': "url('/static/images/authentication/login-bg.webp')",
             },
             gridTemplateRows: {
                 'layout': 'auto 1fr auto',

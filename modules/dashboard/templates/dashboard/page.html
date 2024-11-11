@@ -1,0 +1,110 @@
+{% extends "layouts/MainLayout.html" %}
+{% load static %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<section class="mx-auto max-w-7xl w-full">
+    <div class="mx-auto w-full px-4">
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <!-- Total de dinero generado -->
+            <div class="bg-green-500 text-white p-4 rounded-lg shadow">
+                <h2 class="text-xl font-semibold">Dinero generado</h2>
+                <p class="text-3xl font-bold">$<span id="total-revenue">0.00</span></p>
+            </div>
+
+            <!-- Último vehículo registrado -->
+            <div class="bg-pink-500 text-white p-4 rounded-lg shadow">
+                <h2 class="text-xl font-semibold">Último vehículo</h2>
+                <p class="text-2xl font-bold" id="last-vehicle">N/A</p>
+            </div>
+
+            <!-- Frecuencia de vehículos -->
+            <div class="bg-white p-4 rounded-lg shadow col-span-1 lg:col-span-2">
+                <h2 class="text-xl font-semibold text-blue-700">Frecuencia de vehículos (últimos 5 días)</h2>
+                <canvas id="vehicle-frequency-chart" class="mt-4"></canvas>
+            </div>
+        </div>
+
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mt-8">
+            <!-- Gráfico de ingresos diarios -->
+            <div class="bg-white p-4 rounded-lg shadow col-span-1 lg:col-span-2">
+                <h2 class="text-xl font-semibold text-green-700">Ingresos diarios (últimos 5 días)</h2>
+                <canvas id="daily-revenue-chart" class="mt-4"></canvas>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="{% static 'vendor/js/chartjs/chart.js' %}"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        fetch('{% url "toll_record:toll_record_analytics" %}', {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin'
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('total-revenue').textContent = data.total_revenue.toFixed(2);
+            document.getElementById('last-vehicle').textContent = data.last_vehicle;
+
+            // Gráfico de frecuencia de vehículos
+            const vehicleFrequencyCtx = document.getElementById('vehicle-frequency-chart').getContext('2d');
+            new Chart(vehicleFrequencyCtx, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(data.vehicle_frequency),
+                    datasets: [{
+                        label: 'Vehículos',
+                        data: Object.values(data.vehicle_frequency),
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+
+            // Gráfico de ingresos diarios
+            const dailyRevenueCtx = document.getElementById('daily-revenue-chart').getContext('2d');
+            new Chart(dailyRevenueCtx, {
+                type: 'line',
+                data: {
+                    labels: Object.keys(data.daily_revenue),
+                    datasets: [{
+                        label: 'Ingresos Diarios ($)',
+                        data: Object.values(data.daily_revenue),
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.3)',
+                        borderWidth: 2,
+                        fill: true
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        })
+        .catch(error => console.error('Error al obtener los datos del dashboard:', error));
+    });
+</script>
+{% endblock %}

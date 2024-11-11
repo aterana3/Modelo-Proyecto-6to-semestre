@@ -26,4 +26,5 @@ urlpatterns = [
     path('', home.HomeView.as_view(), name='home'),
     path('authentication/', include('modules.authentication.urls')),
     path('toll_record/', include('modules.toll_record.urls')),
+    path('dashboard/', include('modules.dashboard.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
