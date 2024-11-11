@@ -1,6 +1,7 @@
 import cv2
 import easyocr
 import numpy as np
+import os
 import re
 import threading
 from modules.toll_record.ia.serialConnection import SerialConnection
@@ -31,7 +32,6 @@ class LicensePlateDetector:
         return True
 
     def process_frame(self, frame):
-        frame = cv2.flip(frame, -1)
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         gray = cv2.blur(gray, (3, 3))
         canny = cv2.Canny(gray, 150, 200)
@@ -79,7 +79,7 @@ class LicensePlateDetector:
                 if not ret:
                     print("Error al capturar imagen.")
                     continue
-
+                frame = cv2.flip(frame, -1)
                 if self.is_capturing:
                     plate_text = self.process_frame(frame)
                     if plate_text:

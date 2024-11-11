@@ -9,9 +9,9 @@ class TollRecordListView(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        lince_plate = self.request.GET.get('lince_plate')
-        if lince_plate:
-            queryset = queryset.filter(lince_plate__icontains=lince_plate)
+        license_plate = self.request.GET.get('license_plate')
+        if license_plate:
+            queryset = queryset.filter(license_plate__icontains=license_plate)
         else:
             queryset = queryset.none()
         return queryset

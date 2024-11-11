@@ -1,7 +1,7 @@
 {% extends 'layouts/MainLayout.html' %}
 
 {% block title %}
-    QuickPass - Registros de matrícula{% if request.GET.lince_plate %}: {{ request.GET.lince_plate }}{% endif %}
+    QuickPass - Registros de matrícula{% if request.GET.license_plate %}: {{ request.GET.license_plate }}{% endif %}
 {% endblock %}
 
 {% block content %}
@@ -10,7 +10,7 @@
             {% include "toll_records/components/Search.html" %}
             {% if toll_records %}
                 <h2 class="font-semibold text-2xl md:text-3xl pb-4 md:pb-8">Registro de
-                    matrícula {{ request.GET.lince_plate }}</h2>
+                    matrícula {{ request.GET.license_plate }}</h2>
                 <div class="overflow-x-auto">
                     <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
                         <thead>
@@ -25,7 +25,7 @@
                         <tbody>
                         {% for record in toll_records %}
                             <tr class="text-gray-700 hover:bg-gray-100 transition-colors">
-                                <td class="px-4 py-3 border-b">{{ record.lince_plate }}</td>
+                                <td class="px-4 py-3 border-b">{{ record.license_plate }}</td>
                                 <td class="px-4 py-3 border-b">{{ record.pass_date }}</td>
                                 <td class="px-4 py-3 border-b">{{ record.location }}</td>
                                 <td class="px-4 py-3 border-b">{{ record.amount_due }}</td>
@@ -39,18 +39,18 @@
                 <div class="py-4">
                     <div class="flex justify-center space-x-2">
                         {% if toll_records.has_previous %}
-                            <a href="?{% if request.GET.lince_plate %}lince_plate={{ request.GET.lince_plate }}&{% endif %}page=1"
+                            <a href="?{% if request.GET.license_plate %}license_plate={{ request.GET.license_plate }}&{% endif %}page=1"
                                class="px-3 py-1 bg-gray-200 text-gray-600 rounded hover:bg-gray-300">Primero</a>
-                            <a href="?{% if request.GET.lince_plate %}lince_plate={{ request.GET.lince_plate }}&{% endif %}page={{ toll_records.previous_page_number }}"
+                            <a href="?{% if request.GET.license_plate %}license_plate={{ request.GET.license_plate }}&{% endif %}page={{ toll_records.previous_page_number }}"
                                class="px-3 py-1 bg-gray-200 text-gray-600 rounded hover:bg-gray-300">Anterior</a>
                         {% endif %}
 
                         <span class="px-3 py-1 bg-gray-300 text-gray-700 rounded">{{ toll_records.number }} de {{ toll_records.paginator.num_pages }}</span>
 
                         {% if toll_records.has_next %}
-                            <a href="?{% if request.GET.lince_plate %}lince_plate={{ request.GET.lince_plate }}&{% endif %}page={{ toll_records.next_page_number }}"
+                            <a href="?{% if request.GET.license_plate %}license_plate={{ request.GET.license_plate }}&{% endif %}page={{ toll_records.next_page_number }}"
                                class="px-3 py-1 bg-gray-200 text-gray-600 rounded hover:bg-gray-300">Siguiente</a>
-                            <a href="?{% if request.GET.lince_plate %}lince_plate={{ request.GET.lince_plate }}&{% endif %}page={{ toll_records.paginator.num_pages }}"
+                            <a href="?{% if request.GET.license_plate %}license_plate={{ request.GET.license_plate }}&{% endif %}page={{ toll_records.paginator.num_pages }}"
                                class="px-3 py-1 bg-gray-200 text-gray-600 rounded hover:bg-gray-300">Último</a>
                         {% endif %}
                     </div>

@@ -1,11 +1,11 @@
 <form method="get" action="{% url 'toll_record:toll_record_list' %}" class="flex items-center space-x-2 mb-4 w-full">
     <input
         type="text"
-        name="lince_plate"
-        id="lince_plate"
+        name="license_plate"
+        id="license_plate"
         class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
         placeholder="Ingrese número de matrícula"
-        value="{{ request.GET.lince_plate }}"
+        value="{{ request.GET.license_plate }}"
     />
     <button
         type="submit"
