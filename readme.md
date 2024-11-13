@@ -26,7 +26,7 @@ El peaje está conformado por dos sensores infrarrojos: uno para detectar el veh
 
 1. Clonar el repositorio:
 ```bash
-git clone https://github.com/aterana3/QuickPass.git
+git clone https://github.com/aterana3/Modelo-Proyecto-6to-semestre.git
 ```
 
 2. Instalar las dependencias:
