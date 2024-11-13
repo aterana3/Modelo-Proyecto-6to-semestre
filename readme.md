@@ -6,6 +6,8 @@ Aquí tienes un README adaptado para tu proyecto "QuickPass":
 
 QuickPass es un proyecto enfocado en la automatización de los peajes, utilizando inteligencia artificial para la detección de matrículas de vehículos. El sistema captura la matrícula de los autos que se aproximan al peaje mediante una cámara y, utilizando IA, procesa la imagen para registrar la matrícula de forma automática. Esto agiliza el proceso de pago y acceso a las vías, mejorando la eficiencia y reduciendo los tiempos de espera.
 
+El peaje está conformado por dos sensores infrarrojos: uno para detectar el vehículo y enviar la señal del Arduino a Python para que comience a capturar la matrícula, y otro sensor para detectar la salida del vehículo y enviar la señal al Arduino para que abra la barrera.
+
 ---
 
 **Colaboradores:**
