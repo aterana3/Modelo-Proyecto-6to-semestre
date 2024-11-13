@@ -21,7 +21,7 @@ class TollRecordListView(ListView):
             queryset = queryset.filter(license_plate__icontains=license_plate)
         else:
             queryset = queryset.none()
-        return queryset
+        return queryset.order_by('pass_date')
 
 
 class AnalyticsView(LoginRequiredMixin, View):

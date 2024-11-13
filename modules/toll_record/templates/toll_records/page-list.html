@@ -20,6 +20,7 @@
                             <th class="px-4 py-3 border-b">Ubicación</th>
                             <th class="px-4 py-3 border-b">Importe</th>
                             <th class="px-4 py-3 border-b">Pagado</th>
+                            <th class="px-4 py-3 border-b">Imagen</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -30,31 +31,49 @@
                                 <td class="px-4 py-3 border-b">{{ record.location }}</td>
                                 <td class="px-4 py-3 border-b">{{ record.amount_due }}</td>
                                 <td class="px-4 py-3 border-b">{{ record.paid|yesno:"Sí,No" }}</td>
+                                <td class="px-4 py-3 border-b">
+                                    <button class="text-blue-500 hover:underline"
+                                            onclick="document.getElementById('modal-{{ record.id }}').showModal()">Ver
+                                        imagen
+                                    </button>
+
+                                    <dialog id="modal-{{ record.id }}" class="rounded-lg shadow-lg p-0 max-w-md w-full">
+                                        <div class="relative">
+                                            <img src="{{ record.image.url }}" alt="Imagen de {{ record.license_plate }}"
+                                                 class="w-full rounded-t-lg">
+                                            <button onclick="document.getElementById('modal-{{ record.id }}').close()"
+                                                    class="absolute top-2 right-2 text-white bg-red-500 rounded-full px-2 py-1 hover:bg-red-600">
+                                                &times;
+                                            </button>
+                                        </div>
+                                    </dialog>
+                                </td>
                             </tr>
                         {% endfor %}
                         </tbody>
                     </table>
                 </div>
+                {% if is_paginated %}
+                    <div class="py-4">
+                        <div class="flex justify-center space-x-2">
+                            {% if toll_records.has_previous %}
+                                <a href="?{% if request.GET.license_plate %}license_plate={{ request.GET.license_plate }}&{% endif %}page=1"
+                                   class="px-3 py-1 bg-gray-200 text-gray-600 rounded hover:bg-gray-300">Primero</a>
+                                <a href="?{% if request.GET.license_plate %}license_plate={{ request.GET.license_plate }}&{% endif %}page={{ toll_records.previous_page_number }}"
+                                   class="px-3 py-1 bg-gray-200 text-gray-600 rounded hover:bg-gray-300">Anterior</a>
+                            {% endif %}
 
-                <div class="py-4">
-                    <div class="flex justify-center space-x-2">
-                        {% if toll_records.has_previous %}
-                            <a href="?{% if request.GET.license_plate %}license_plate={{ request.GET.license_plate }}&{% endif %}page=1"
-                               class="px-3 py-1 bg-gray-200 text-gray-600 rounded hover:bg-gray-300">Primero</a>
-                            <a href="?{% if request.GET.license_plate %}license_plate={{ request.GET.license_plate }}&{% endif %}page={{ toll_records.previous_page_number }}"
-                               class="px-3 py-1 bg-gray-200 text-gray-600 rounded hover:bg-gray-300">Anterior</a>
-                        {% endif %}
+                            <span class="px-3 py-1 bg-gray-300 text-gray-700 rounded">{{ toll_records.number }} de {{ toll_records.paginator.num_pages }}</span>
 
-                        <span class="px-3 py-1 bg-gray-300 text-gray-700 rounded">{{ toll_records.number }} de {{ toll_records.paginator.num_pages }}</span>
-
-                        {% if toll_records.has_next %}
-                            <a href="?{% if request.GET.license_plate %}license_plate={{ request.GET.license_plate }}&{% endif %}page={{ toll_records.next_page_number }}"
-                               class="px-3 py-1 bg-gray-200 text-gray-600 rounded hover:bg-gray-300">Siguiente</a>
-                            <a href="?{% if request.GET.license_plate %}license_plate={{ request.GET.license_plate }}&{% endif %}page={{ toll_records.paginator.num_pages }}"
-                               class="px-3 py-1 bg-gray-200 text-gray-600 rounded hover:bg-gray-300">Último</a>
-                        {% endif %}
+                            {% if toll_records.has_next %}
+                                <a href="?{% if request.GET.license_plate %}license_plate={{ request.GET.license_plate }}&{% endif %}page={{ toll_records.next_page_number }}"
+                                   class="px-3 py-1 bg-gray-200 text-gray-600 rounded hover:bg-gray-300">Siguiente</a>
+                                <a href="?{% if request.GET.license_plate %}license_plate={{ request.GET.license_plate }}&{% endif %}page={{ toll_records.paginator.num_pages }}"
+                                   class="px-3 py-1 bg-gray-200 text-gray-600 rounded hover:bg-gray-300">Último</a>
+                            {% endif %}
+                        </div>
                     </div>
-                </div>
+                {% endif %}
             {% else %}
                 <h2 class="font-semibold text-2xl md:text-3xl pb-4 md:pb-8">No se encontraron registros de peaje para
                     esta matrícula.</h2>

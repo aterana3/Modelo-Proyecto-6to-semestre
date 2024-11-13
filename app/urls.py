@@ -27,4 +27,4 @@ urlpatterns = [
     path('authentication/', include('modules.authentication.urls')),
     path('toll_record/', include('modules.toll_record.urls')),
     path('dashboard/', include('modules.dashboard.urls')),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
