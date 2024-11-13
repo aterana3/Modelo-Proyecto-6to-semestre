@@ -1,7 +1,3 @@
-Aquí tienes un README adaptado para tu proyecto "QuickPass":
-
----
-
 **Idea del Proyecto:**
 
 QuickPass es un proyecto enfocado en la automatización de los peajes, utilizando inteligencia artificial para la detección de matrículas de vehículos. El sistema captura la matrícula de los autos que se aproximan al peaje mediante una cámara y, utilizando IA, procesa la imagen para registrar la matrícula de forma automática. Esto agiliza el proceso de pago y acceso a las vías, mejorando la eficiencia y reduciendo los tiempos de espera.
