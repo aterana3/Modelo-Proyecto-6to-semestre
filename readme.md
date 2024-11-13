@@ -17,11 +17,11 @@ QuickPass es un proyecto enfocado en la automatización de los peajes, utilizand
 - Python
 - Django
 - OpenCV
-- TensorFlow
+- EasyOCR
 - JavaScript
 - HTML
 - Tailwind CSS
-
+- C++
 ---
 
 **Instalación:**
